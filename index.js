@@ -3,6 +3,7 @@ const app = express()
 const morgan = require('morgan')
 const cors = require('cors')
 
+app.use(express.static('build'))
 app.use(express.json())
 app.use(cors())
 
@@ -35,10 +36,6 @@ morgan.token('data', (req, res) => {
 // morgon logger
 const logger = morgan(':method :url :status :res[content-length] - :response-time ms :data')
 app.use(logger)
-
-app.get('/', (req, res) => {
-  res.send('<h1>Hello Express</h1>')
-})
 
 app.get('/api/notes', (req, res) => {
   res.json(notes)
